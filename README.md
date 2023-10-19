@@ -17,16 +17,19 @@ sem aplicar todas as configurações dentro do arquivo Program.cs, aproveitando 
 + GET https://localhost:7069/api/BuscaTarefasAbertas?skip=0&take=5
 + GET https://localhost:7069/api/BuscaTarefasConcluidas?skip=0&take=5
 + GET https://localhost:7069/api/BuscaTarefasExcluidas?skip=0&take=5
++ GET https://localhost:7069/api/BuscaTarefasAtrasadas?skip=0&take=5
 + PUT https://localhost:7069/api/AtualizaStatus/{id}?status={status}
 
-
+#
 ### Modelo de Dados
 A Entidade tarefa possuí os seguintes campos:
 + __IdTarefa__ É o identificador único para cada ação.
 + __Nome__ É o título da Tarefa.
 + __Descricao__ É o descritivo do que deve ser feito na tarefa.
++ __DataAbertura__ Define a Data em Que foi Aberta a Tarefa.
++ __DataFechamento__ Define a data limite para fechar a Tarefa.
 + __Status__ É uma propriedade do tipo Enum para definir em qual Status se encontra a tarefa.
-
+### OBS: Se a DataFechamento for menor que a data de Abertura o Status será "Atrasada".
 #
 ### Modelo de Status
 ```C#
