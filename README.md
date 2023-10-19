@@ -1,4 +1,4 @@
-# API Minima com Arquitetura Cebola
+# API Mínima com Arquitetura Cebola
 ## Descrição do Projeto
 Foi feita uma API Mínima para gerenciar tarefas, utilizando a Arquitetura Cebola. Essa API fornece um CRUD simples como
 Criar uma tarefa, consultar, editar e excluir. O intuito do projeto é apresentar uma forma diferente de se construir uma API Mínima
