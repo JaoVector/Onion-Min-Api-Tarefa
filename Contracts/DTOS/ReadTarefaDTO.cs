@@ -13,6 +13,8 @@ namespace Contracts.DTOS
         public int IdTarefa { get; set; }
         public string? Nome { get; set; }
         public string? Descricao { get; set; }
+        public string? DataAbertura { get; set; }
+        public string? DataFechamento { get; set; }
         public string? Status { get; set; }
     }
 }

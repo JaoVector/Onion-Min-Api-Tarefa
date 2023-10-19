@@ -11,6 +11,7 @@ namespace Services.Repository.Interfaces
         IQueryable<Tarefa> ConsultaTarefasAbertas(int skip, int take);
         IQueryable<Tarefa> ConsultaTarefasConcluidas(int skip, int take);
         IQueryable<Tarefa> ConsultaTarefasExcluidas(int skip, int take);
+        IQueryable<Tarefa> ConsultaTarefasAtrasadas(int skip, int take);
         void AtualizaTarefa(Tarefa entiy);
     }
 }

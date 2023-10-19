@@ -26,6 +26,11 @@ namespace Services.Repository.Classes
                 throw new Exception("Erro ao Adicionar tarefa");
             }
 
+            if (entity.DataFechamento < DateTime.Now)
+            {
+                entity.Status = TarefaEnum.Atrasada;
+            }
+
             _entities.Add(entity);
             _context.SaveChanges();
         }
@@ -45,7 +50,7 @@ namespace Services.Repository.Classes
         {
             try
             {
-                return _entities.AsNoTracking().Skip(skip).Take(take).Where(x => x.Status != TarefaEnum.Excluida).AsQueryable();
+                return _entities.AsNoTracking().Skip(skip).Take(take).Where(x => x.Status != TarefaEnum.Excluida && x.Status != TarefaEnum.Atrasada).AsQueryable();
             }
             catch (Exception ex)
             {
@@ -107,6 +112,19 @@ namespace Services.Repository.Classes
             }
         }
 
+        public IQueryable<T> GetTarefasAtrasadas(int skip, int take)
+        {
+            try
+            {
+                return _entities.AsNoTracking().Skip(skip).Take(take).Where(x => x.Status == TarefaEnum.Atrasada).AsQueryable();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Ocorreu um Erro {ex}");
+            }
+        }
+
         public void UpdateTarefa(T entity)
         {
             try
@@ -114,6 +132,11 @@ namespace Services.Repository.Classes
                 if (entity == null)
                 {
                     throw new Exception("Erro ao Atualizar tarefa");
+                }
+
+                if (entity.DataFechamento < DateTime.Now && entity.Status != TarefaEnum.Excluida)
+                {
+                    entity.Status = TarefaEnum.Atrasada;
                 }
 
                 _entities.Update(entity);
@@ -125,6 +148,5 @@ namespace Services.Repository.Classes
                 throw new Exception($"Ocorreu um Erro {ex}");
             }
         }
-
     }
 }

@@ -52,6 +52,11 @@ namespace Services.Repository.Classes
             return _repository.GetTarefasExcluidas(skip, take);
         }
 
+        public IQueryable<Tarefa> ConsultaTarefasAtrasadas(int skip, int take)
+        {
+            return _repository.GetTarefasAtrasadas(skip, take);
+        }
+
         public void DeleteTarefa(Tarefa tarefa)
         {
             _repository.Delete(tarefa);

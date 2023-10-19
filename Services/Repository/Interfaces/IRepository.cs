@@ -12,6 +12,7 @@ namespace Services.Repository.Interfaces
         IQueryable<T> GetTarefasAbertas(int skip, int take);
         IQueryable<T> GetTarefasConcluidas(int skip, int take);
         IQueryable<T> GetTarefasExcluidas(int skip, int take);
+        IQueryable<T> GetTarefasAtrasadas(int skip, int take);
         void UpdateTarefa(T entity);
         
     }

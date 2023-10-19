@@ -13,8 +13,10 @@ namespace Contracts.Profiles
     {
         public TarefaProfile()
         {
-            CreateMap<CreateTarefaDTO, Tarefa>();
+            CreateMap<CreateTarefaDTO, Tarefa>().ForMember(d => d.DataFechamento, opt => opt.MapFrom(src => DateTime.Parse(src.DataFechamento)));
             CreateMap<Tarefa, ReadTarefaDTO>()
+                .ForMember(x => x.DataAbertura, opt => opt.MapFrom(src => ((DateTime)src.DataAbertura).ToString("dd/MM/yyyy")))
+                .ForMember(x => x.DataFechamento, opt => opt.MapFrom(src => ((DateTime)src.DataFechamento).ToString("dd/MM/yyyy")))
                 .ForMember(d => d.Status, opt => opt.MapFrom(src => src.Status.ToString()));
             CreateMap<ReadTarefaDTO, Tarefa>();
             CreateMap<Tarefa, UpdateTarefaDTO>();

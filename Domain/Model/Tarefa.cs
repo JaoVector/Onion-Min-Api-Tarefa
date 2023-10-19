@@ -18,6 +18,10 @@ namespace Domain.Model
         [StringLength(550)]
         public string? Descricao { get; set; }
         [Required]
+        public DateTime DataAbertura { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime DataFechamento { get; set; }
+        [Required]
         public TarefaEnum Status { get; set; } = TarefaEnum.Aberta;
     }
 }

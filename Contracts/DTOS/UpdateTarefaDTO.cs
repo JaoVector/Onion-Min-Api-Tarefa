@@ -10,6 +10,7 @@ namespace Contracts.DTOS
     {
         public string? Nome { get; set; }
         public string? Descricao { get; set; }
+        public string? DataFechamento { get; set; }
         public string? Status { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace TarefasMinAPI.TarefaConfig
             app.MapGet("api/BuscaTarefasAbertas", BuscaTarefasAbertas);
             app.MapGet("api/BuscaTarefasConcluidas", BuscaTarefasConcluidas);
             app.MapGet("api/BuscaTarefasExcluidas", BuscaTarefasExcluidas);
+            app.MapGet("api/BuscaTarefasAtrasadas", BuscaTarefasAtrasadas);
             app.MapPut("api/AtualizaStatus/{id}", AtualizaStatusTarefa);
             app.MapPut("api/AtualizaTarefa/{id}", AtualizaTarefa);
             app.MapDelete("api/DeletaTarefa/{id}", DeletaTarefa);
@@ -112,6 +113,21 @@ namespace TarefasMinAPI.TarefaConfig
             }
         }
 
+        private static IResult BuscaTarefasAtrasadas(ITarefaService service, IMapper mapper, int skip = 0, int take = 5)
+        {
+            try
+            {
+                var consulta = service.ConsultaTarefasAtrasadas(skip, take);
+                var tarefas = mapper.Map<List<ReadTarefaDTO>>(consulta);
+                return tarefas.IsNullOrEmpty() ? Results.NotFound($"Não Existem Tarefas com Status Atrasada") : Results.Ok(tarefas);
+            }
+            catch (Exception ex)
+            {
+
+                return Results.Problem(ex.Message);
+            }
+        }
+
         private static async Task<IResult> AtualizaStatusTarefa(ITarefaService service, IMapper mapper, int id, string status) 
         {
             try
@@ -146,6 +162,7 @@ namespace TarefasMinAPI.TarefaConfig
 
                 consulta.Nome = tarefaDTO.Nome;
                 consulta.Descricao = tarefaDTO.Descricao;
+                consulta.DataFechamento = DateTime.Parse(tarefaDTO.DataFechamento);
                 consulta.Status = status;
                 
 
@@ -180,6 +197,8 @@ namespace TarefasMinAPI.TarefaConfig
                     return TarefaEnum.Concluida;
                 case "excluida":
                     return TarefaEnum.Excluida;
+                case "atrasada":
+                    return TarefaEnum.Atrasada;
                 default:
                     return TarefaEnum.Aberta;
             }

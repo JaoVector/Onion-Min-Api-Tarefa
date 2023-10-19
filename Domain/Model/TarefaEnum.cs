@@ -12,6 +12,7 @@ namespace Domain.Model
     {
         Aberta,
         Concluida,
-        Excluida 
+        Excluida,
+        Atrasada
     }
 }
