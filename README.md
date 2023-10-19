@@ -37,7 +37,8 @@ public enum TarefaEnum
 {
     Aberta,
     Concluida,
-    Excluida
+    Excluida,
+    Atrasada
 }
 ```
 #
@@ -45,7 +46,8 @@ public enum TarefaEnum
 ```json
 {
     "nome": "string",
-    "descricao": "string"
+    "descricao": "string",
+    "dataFechamento": "DD/MM/YYYY"
 }
 ```
 ### Corpo Requisição PUT
@@ -53,6 +55,7 @@ public enum TarefaEnum
 {
     "nome": "string",
     "descricao": "string",
+    "dataFechamento": "DD/MM/YYYY",
     "status": "string"
 }
 ```
